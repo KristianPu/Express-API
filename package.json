@@ -22,6 +22,7 @@
     "debug": "^2.6.9",
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
+    "dotenv": "^16.0.3",
     "ee-first": "^1.1.1",
     "enabled": "^2.0.0",
     "encodeurl": "^1.0.2",
@@ -93,9 +94,9 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "tsc && node dist/index.js",
     "build": "tsc",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node index.ts"
   },
   "repository": {
     "type": "git",
