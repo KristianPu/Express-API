@@ -1,12 +1,12 @@
 import express, { Request, Response } from "express";
-import { errorHandler } from "./src/middlewares/errorHandler";
-import { logger } from "./src/middlewares/logger";
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from "mongoose";
 import { validateEnvVars } from "./src/validations/env.validation";
+import { errorHandler } from "./src/api/middlewares/errorHandler";
+import { logger } from "./src/api/middlewares/logger";
 dotenv.config();
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(errorHandler);
+app.use('/api', routes)
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
