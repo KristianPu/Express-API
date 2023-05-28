@@ -3,28 +3,27 @@ import { errorHandler } from "./src/middlewares/errorHandler";
 import { logger } from "./src/middlewares/logger";
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from "mongoose";
+import { validateEnvVars } from "./src/validations/env.validation";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
-const uri = process.env.MONGODB_URI || "";
+const envVars = validateEnvVars();
+const { PORT, MONGODB_URI } = envVars;
 
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(morgan('combined'));
 app.use(errorHandler);
 
-mongoose.connect(uri)
+mongoose.connect(MONGODB_URI)
   .then(() => {
     logger.log("info", `Connected to MongoDB!`);
 
-    app.listen(port, () => {
-      logger.log("info", `App listening on port ${port}!`);
+    app.listen(PORT, () => {
+      logger.log("info", `App listening on port ${PORT}!`);
     });
   })
   .catch(error => {
