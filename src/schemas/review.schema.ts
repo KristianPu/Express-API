@@ -1,12 +1,32 @@
-import mongoose from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
-const reviewSchema = new mongoose.Schema({
+export default interface Review {
+    _id: Types.ObjectId;
+    productId: Types.ObjectId;
+    userId: Types.ObjectId;
+    rating: number;
+    comment: string;
+}
 
-    productId: { type: mongoose.Schema.Types.ObjectId, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, required: true },
-    rating: { type: Number, required: true },
-    comment: { type: String, required: true },
-    
-});
+const schema = new Schema<Review>(
+    {
+        productId: { 
+            type: Schema.Types.ObjectId, 
+            required: true 
+        },
+        userId: { 
+            type: Schema.Types.ObjectId, 
+            required: true 
+        },
+        rating: { 
+            type: Schema.Types.Number, 
+            required: true 
+        },
+        comment: { 
+            type: Schema.Types.String, 
+            required: true 
+        }
+    }
+);
 
-export const Review = mongoose.model('Review', reviewSchema);
+export const ReviewModel = model('Review', schema, 'reviews');

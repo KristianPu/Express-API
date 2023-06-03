@@ -1,4 +1,4 @@
-import { BadRequestError } from "../middlewares/errorHandler";
+import { BadRequestError } from "../api/middlewares/errorHandler";
 
 const dotenv = require("dotenv");
 const joi = require("joi");

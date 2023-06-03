@@ -1,19 +1,30 @@
-export const getAllProducts = () => {
-    return this.product.find();
-};
+import Product, { ProductModel } from '../schemas/product.schema';
+import { Types } from 'mongoose';
 
-export const getProductById = (id: string) => {
-    return this.product.find({ where: { id } });
-};
+async function findAll(): Promise<Product[] | null> {
+    return ProductModel.find().exec();
+}
 
-export const createProduct = (name: string, price: number) => {
-    return this.product.create({ name, price });
-};
+async function findById(_id: Types.ObjectId): Promise<Product | null> {
+    return ProductModel.findOne({ _id }).exec();
+}
 
-export const updateProduct = (id: string, name: string, price: number) => {
-    return this.product.update({ where: { id } }, { name, price });
-};
+async function create(product: Product): Promise<Product> {
+    return await ProductModel.create(product);
+}
 
-export const deleteProduct = (id: string) => {
-    return this.product.delete({ where: { id } });
-};
+async function update(product: Product): Promise<Product | null> {
+    return await ProductModel.findByIdAndUpdate(product._id, product).exec();
+}
+
+async function remove(_id: Types.ObjectId): Promise<Product | null> {
+    return await ProductModel.findByIdAndRemove(_id).exec();
+}
+
+export default {
+    findAll,
+    findById,
+    create,
+    update,
+    remove
+}

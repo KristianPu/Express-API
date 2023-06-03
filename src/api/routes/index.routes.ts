@@ -1,12 +1,14 @@
 import express from "express";
-import * as product from "./product.routes";
-import * as review from "./review.routes";
-import * as user from "./user.routes";
+import userRouter from "./user.routes";
+import productRouter from "./product.routes";
+import { errorHandler } from "../middlewares/errorHandler";
 
 const router = express.Router();
 
-router.use('/review', review.default);
-router.use('/user', user.default);
-router.use('/product', product.default);
+router.use(errorHandler)
+router.use('api/v1', router);
+
+router.use('/user', userRouter);
+router.use('/product', productRouter);
 
 export default router;

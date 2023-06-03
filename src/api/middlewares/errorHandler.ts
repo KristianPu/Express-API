@@ -1,6 +1,6 @@
-import { HttpStatusCode } from "../utils/http-status-code";
 import { Request, Response, NextFunction } from 'express';
 import { logger } from "./logger";
+import { HttpStatusCode } from '../../utils/http-status-code';
 
 export const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
     const statusCode = 500;

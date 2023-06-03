@@ -1,12 +1,13 @@
-import * as productController from "../controllers/products.controller";
+import * as productController from "../controllers/product.controller";
 import express from 'express';
 
-const router = express.Router();
+const productRouter = express.Router();
 
-router.get('/products', productController.getAllProducts);
-router.get('/products/:id', productController.getProductById);
-router.post('/products', productController.createProduct);
-router.put('/products/:id', productController.updateProduct);
-router.delete('/products/:id', productController.deleteProduct);
+productRouter.get('/products', productController.getAllProducts);
+productRouter.get('/products/:id', productController.getProductById);
+productRouter.post('/products', productController.createProduct);
+productRouter.put('/products/:id', productController.updateProduct);
+productRouter.delete('/products/:id', productController.removeProduct);
+productRouter.post('/products/:id/reviews', productController.createProductReview);
 
-export default router;
+export default productRouter;
