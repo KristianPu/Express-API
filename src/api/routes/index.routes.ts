@@ -6,7 +6,6 @@ import { errorHandler } from "../middlewares/errorHandler";
 const router = express.Router();
 
 router.use(errorHandler)
-router.use('api/v1', router);
 
 router.use('/user', userRouter);
 router.use('/product', productRouter);

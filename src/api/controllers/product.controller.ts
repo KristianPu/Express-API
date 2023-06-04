@@ -4,34 +4,43 @@ import { tryCatch } from "../../utils/try-catch"
 import { Request, Response } from 'express';
 import reviewService from "../../services/review.service";
 
-export const getAllProducts = tryCatch((req: Request, res: Response) => {
-    const products = productService.getAllProducts();
+const getAllProducts = tryCatch(async (req: Request, res: Response) => {
+    const products = await productService.getAllProducts();
     res.send(products);
 }); 
 
-export const getProductById = tryCatch((req: Request, res: Response) => {
+const getProductById = tryCatch(async (req: Request, res: Response) => {
     const productId = new Types.ObjectId(req.params.id);
-    const product = productService.getProductById(productId);
+    const product = await productService.getProductById(productId);
     res.send(product);
 }); 
 
-export const createProduct = tryCatch((req: Request, res: Response) => {
-    const newProduct = productService.createProduct(req.body);
+const createProduct = tryCatch(async (req: Request, res: Response) => {
+    const newProduct = await productService.createProduct(req.body);
     res.status(201).send(newProduct);
 }); 
 
-export const updateProduct = tryCatch((req: Request, res: Response) => {
-    const updatedProduct = productService.updateProduct(req.body);
+const updateProduct = tryCatch(async (req: Request, res: Response) => {
+    const updatedProduct = await productService.updateProduct(req.body);
     res.send(updatedProduct);
 }); 
 
-export const removeProduct = tryCatch((req: Request, res: Response) => {
+const removeProduct = tryCatch(async (req: Request, res: Response) => {
     const productId = new Types.ObjectId(req.params.id);
-    const deletedProduct = productService.removeProduct(productId);
+    const deletedProduct = await productService.removeProduct(productId);
     res.status(204).send(deletedProduct);
 }); 
 
-export const createProductReview = tryCatch((req: Request, res: Response) => {
-    const newProductReview = reviewService.createReview(req.body);
+const createProductReview = tryCatch(async (req: Request, res: Response) => {
+    const newProductReview = await reviewService.createReview(req.body);
     res.status(201).send(newProductReview);
 })
+
+export default {
+    getAllProducts,
+    getProductById,
+    createProduct,
+    updateProduct,
+    removeProduct,
+    createProductReview
+}

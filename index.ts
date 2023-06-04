@@ -14,7 +14,7 @@ app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(errorHandler);
-app.use('/api', router)
+app.use('/', router)
 
 app.listen(port, () => {
   logger.log("info", `App listening on port ${port}!`);
