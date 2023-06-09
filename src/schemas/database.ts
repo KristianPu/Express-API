@@ -3,7 +3,7 @@ import { logger } from "../api/middlewares/logger";
 import { db } from '../../config';
 
 mongoose.connect(db.uri)
-  .then(() => {
+  .then(async () => {
     logger.log("info", `Connected to MongoDB!`);
   })
   .catch(error => {

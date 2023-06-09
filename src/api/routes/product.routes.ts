@@ -8,6 +8,6 @@ productRouter.get('/:id', productController.getProductById);
 productRouter.post('/', productController.createProduct);
 productRouter.put('/', productController.updateProduct);
 productRouter.delete('/:id', productController.removeProduct);
-productRouter.post('/:id/reviews', productController.createProductReview);
+productRouter.post('/reviews', productController.createProductReview);
 
 export default productRouter;
